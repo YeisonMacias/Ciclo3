@@ -14,18 +14,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MessageService {
-    
+
     @Autowired
     private MessageRepository messageRepository;
-    
+
     public List<Message> getAll() {
         return messageRepository.getAll();
     }
-    
+
     public Optional<Message> getMessage(int id) {
         return messageRepository.getMessage(id);
     }
-    
+
     public Message save(Message message) {
         if (message.getIdMessage() == null) {
             return messageRepository.save(message);
@@ -38,5 +38,27 @@ public class MessageService {
             }
         }
     }
-        
+
+    public Message update(Message message) {
+        if (message.getIdMessage() != null) {
+            Optional<Message> messageAux = messageRepository.getMessage(message.getIdMessage());
+            if (!messageAux.isEmpty()) {
+                if (message.getMessageText() != null) {
+                    messageAux.get().setMessageText(message.getMessageText());
+                }
+                return messageRepository.save(messageAux.get());
+            }
+        }
+        return message;
+    }
+
+    public boolean delete(int id) {
+        Optional<Message> messageAux = messageRepository.getMessage(id);
+        if (!messageAux.isEmpty()) {
+            messageRepository.delete(messageAux.get());
+            return true;
+        }
+        return false;
+    }
+
 }

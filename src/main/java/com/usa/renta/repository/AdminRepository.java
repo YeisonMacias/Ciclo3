@@ -17,21 +17,21 @@ import org.springframework.stereotype.Repository;
 public class AdminRepository {
     
     @Autowired
-    private AdminCrudRepository adminCrudRepo;
+    private AdminCrudRepository adminCrudReposotiry;
 
     public List<Admin> getAll(){
-        return (List<Admin>) adminCrudRepo.findAll();
+        return (List<Admin>) adminCrudReposotiry.findAll();
     }
 
     public Optional<Admin> getAdmin (int id) {
-        return adminCrudRepo.findById(id);
+        return adminCrudReposotiry.findById(id);
     }
 
     public Admin save(Admin admin){
-        return adminCrudRepo.save(admin);
+        return adminCrudReposotiry.save(admin);
     }
 
     public void delete(Admin admin){
-        adminCrudRepo.delete(admin);
+        adminCrudReposotiry.delete(admin);
     }    
 }

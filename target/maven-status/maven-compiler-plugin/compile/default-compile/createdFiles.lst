@@ -1,0 +1,16 @@
+com\usa\renta\controller\CategoryController.class
+com\usa\renta\controller\MessageController.class
+com\usa\renta\service\MachineService.class
+com\usa\renta\repository\MachineRepository.class
+com\usa\renta\RentaMaquinariaApplication.class
+com\usa\renta\model\Category.class
+com\usa\renta\service\MessageService.class
+com\usa\renta\repository\CategoryRepository.class
+com\usa\renta\controller\MachineController.class
+com\usa\renta\model\Machine.class
+com\usa\renta\repository\crud\CategoryCrudRepository.class
+com\usa\renta\repository\crud\MachineCrudRepository.class
+com\usa\renta\model\Message.class
+com\usa\renta\repository\crud\MessageCrudRepository.class
+com\usa\renta\repository\MessageRepository.class
+com\usa\renta\service\CategoryService.class
