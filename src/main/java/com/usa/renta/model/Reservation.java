@@ -6,6 +6,7 @@
 package com.usa.renta.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="reservation")
-public class Reservation {
+public class Reservation implements Serializable{
     
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)

@@ -6,6 +6,8 @@
 package com.usa.renta.controller;
 
 import com.usa.renta.model.Reservation;
+import com.usa.renta.model.custom.CountClient;
+import com.usa.renta.model.custom.StatusAmount;
 import com.usa.renta.service.ReservationService;
 import java.util.List;
 import java.util.Optional;
@@ -58,4 +60,21 @@ public class ReservationController {
     public boolean delete(@PathVariable("id") int id) {
         return reservationService.delete(id);
     }
+    
+//    Reports
+    @GetMapping("/report-status")
+    public StatusAmount getReservationStatus() {
+        return reservationService.getStatusReport();
+    }
+    
+    @GetMapping("/report-clients")
+    public List<CountClient> getCountClient() {
+        return reservationService.getTopClient();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getDatesReport(@PathVariable("dateOne") String date1, @PathVariable("dateTwo") String date2){
+        return reservationService.getReservationPeriod(date1, date2);
+    }
+    
 }

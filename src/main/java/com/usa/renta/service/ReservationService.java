@@ -6,7 +6,13 @@
 package com.usa.renta.service;
 
 import com.usa.renta.model.Reservation;
+import com.usa.renta.model.custom.CountClient;
+import com.usa.renta.model.custom.StatusAmount;
 import com.usa.renta.repository.ReservationRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,4 +72,38 @@ public class ReservationService {
         }
         return false;
     }
+
+    public List<CountClient> getTopClient() {
+        return reservationRepository.getTopClients();
+    }
+
+    public StatusAmount getStatusReport() {
+        List<Reservation> completed = reservationRepository.getReservationsByStatus("completed");
+        List<Reservation> cancelled = reservationRepository.getReservationsByStatus("cancelled");
+        
+        StatusAmount statusAmount = new StatusAmount(completed.size(), cancelled.size());
+        
+        return statusAmount;
+    }
+    
+    public List<Reservation> getReservationPeriod(String date1, String date2) {
+        
+        // yyyy-mm-dd
+        SimpleDateFormat parseDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateOne = new Date();
+        Date dateTwo = new Date();
+        
+        try {
+            dateOne = parseDate.parse(date1);
+            dateTwo = parseDate.parse(date2);
+        } catch (ParseException e) {
+        }
+        
+        if (dateOne.before(dateTwo)) {
+            return reservationRepository.getReservationPeriod(dateOne, dateTwo);
+        } else {
+            return new ArrayList<>();
+        }       
+    }
+    
 }
